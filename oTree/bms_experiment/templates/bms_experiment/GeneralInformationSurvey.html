@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+
+{% if player.trans_cond == 'no' %}
+Question Page 1/3
+{% else %}
+Question Page 1/5
+{% endif %}
+{% endblock %}
+
+{% block content %}
+    <p>
+        Please enter the following information:
+    </p>
+
+    {% formfield player.age %}
+    {% formfield player.gender %}
+    {% formfield player.installed %}
+
+    {% next_button %}
+
+{% endblock %}

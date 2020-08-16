@@ -1,0 +1,75 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+Information
+{% endblock %}
+
+{% block content %}
+<p class="lead">
+    You will now be presented with information regarding the corona-warn-app. This information gives you facts about the
+    app, which are based on the publicly available source-code.
+</p>
+<br>
+<h4> What the app does while being active </h4>
+<p>
+    {% if player.trans_cond == 'brief' %}
+    The app will interchange pseudonymous data with nearby phones, which also have the app installed. This data cannot
+    be used to expose the user’s identity.
+    {% else %}
+    Every user is given a <em>Temporary Exposure Key (TEK) </em>, which changes daily. With the help of this
+    key, a pseudonymous identifier is derived, which is renewed every fifteen minutes. Using Bluetooth the app will
+    interchange this identifier with nearby mobile phones. Interchanged identifiers will be saved locally for 14 days.
+    The identifier of nearby users is the only data, which is <strong>collected</strong> by the app, meaning that it
+    does not and can not collect any location data or any other personal data. Other than the user’s own regularly
+    changing identifier the app does not <strong>provide</strong> any information to the outside world without their
+    consent.
+    {% endif %}
+</p>
+<h4> What data is stored </h4>
+<p>
+    {% if player.trans_cond == 'brief' %}
+    The only data that is stored on a central server is data, which contains pseudonymous information about someone, who
+    got infected and voluntarily shared this information. This means no data, which can be traced back to the infected
+    person, is stored. Later in the experiment you will be asked what the color is: the color is yellow.
+    {% else %}
+    The Corona-Warn-App is based on a decentralized approach. The only data, which is stored centrally on a server is a
+    collection of keys, the rest of the data is kept on the user’s local device. This prevents any third-party from
+    getting access to personal information. The keys on the centralized server are called Temporary Exposure Keys. They
+    belong to the infected, who used the app and voluntarily decided to upload their key. These keys can not be traced
+    back to the person, as they change daily and are only published in case of an infection (with consent). This implies
+    that data concerning real names and location won’t be collected. Later in the experiment you will be asked what the
+    color is: the color is yellow.
+    {% endif %}
+</p>
+<h4> When warnings are given </h4>
+<p>
+    {% if player.trans_cond == 'brief' %}
+    If the user has the pseudonymous data from someone, who got infected and shared this information, the app proceeds
+    through a multitude of steps (i.e. weighing time of exposure and distance) to determine the infection risk and
+    updates the user about their risk score. They will not have the possibility to find out who the infected person is.
+    {% else %}
+    The warning functionality is provided, by comparing the list of publicly available Temporary Exposure Keys with the
+    locally stored identifiers, which were interchanged with nearby smartphones. Because these identifiers were derived
+    from the Temporary Exposure Key of their owner, it is possible to check whether a given identifier was derived from
+    a given key. If any of the locally stored identifiers from the last 14 days was derived from a key in the public
+    list of “infected” keys, the app proceeds through a multitude of steps (i.e. weighing time of exposure and distance)
+    to determine the infection risk and updates the user about their risk score.
+    {% endif %}
+</p>
+<h4> What happens when infected </h4>
+<p>
+    {% if player.trans_cond == 'brief' %}
+    When a user gets infected with the coronavirus they will have the possibility to share this information to warn
+    others. However, it is not possible to expose their identity, even if they decided to publicly share that they got
+    infected.
+    {% else %}
+    When a user is infected with the coronavirus, they will be asked whether they want to publish their Temporary
+    Exposure Keys of the last fourteen days. If and only if the user agrees, the keys are uploaded to the central
+    server.
+    {% endif %}
+</p>
+
+{% next_button %}
+
+{% endblock %}

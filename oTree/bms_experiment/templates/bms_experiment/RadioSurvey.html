@@ -1,0 +1,82 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+
+{% if player.trans_cond == 'no' %}
+Question Page 2/3
+{% elif player.round_number == 1 %}
+Question Page 2/5
+{% else %}
+Question Page 4/5
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<p>
+    To what extent to you agree with the following statements?
+</p>
+<p>
+    {{ form.competence.label | safe}}
+    {{ form.competence }}
+</p>
+<hr/>
+<p>
+    {{ form.benevolence.label | safe}}
+    {{ form.benevolence }}
+</p>
+<hr/>
+<p>
+    {{ form.anonymity.label | safe}}
+    {{ form.anonymity }}
+</p>
+<hr/>
+<p>
+    {{ form.unlinkabilty_neg.label | safe}}
+    {{ form.unlinkabilty_neg }}
+</p>
+<hr/>
+<p>
+    {{ form.no_central_entity.label | safe}}
+    {{ form.no_central_entity }}
+</p>
+<hr/>
+<p>
+    {{ form.benevolence_neg.label | safe}}
+    {{ form.benevolence_neg }}
+</p>
+<hr/>
+<p>
+    {{ form.no_tracking.label | safe}}
+    {{ form.no_tracking }}
+</p>
+<hr/>
+<p>
+    {{ form.anonymity_neg.label | safe}}
+    {{ form.anonymity_neg }}
+</p>
+<hr/>
+<p>
+    {{ form.unlinkabilty.label | safe}}
+    {{ form.unlinkabilty }}
+</p>
+<hr/>
+<p>
+    {{ form.competence_neg.label | safe}}
+    {{ form.competence_neg }}
+</p>
+<hr/>
+<p>
+    {{ form.no_central_entity_neg.label | safe}}
+    {{ form.no_central_entity_neg }}
+</p>
+<hr/>
+<p>
+    {{ form.no_tracking_neg.label | safe}}
+    {{ form.no_tracking_neg }}
+</p>
+
+
+{% next_button %}
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+
+{% if player.trans_cond == 'no' %}
+Question Page 3/3
+{% elif player.round_number == 1 %}
+Question Page 3/5
+{% else %}
+Question Page 5/5
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+<p>
+    Try to answer the following questions in two to five sentences.
+</p>
+{% formfields %}
+
+
+{% next_button %}
+
+{% endblock %}
+
+
+{% block app_scripts %}
+<script>
+    const tx = document.getElementsByTagName('textarea');
+    for (let i = 0; i < tx.length; i++) {
+        tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');
+        tx[i].addEventListener("input", OnInput, false);
+    }
+
+    function OnInput() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    }
+</script>
+{% endblock %}
