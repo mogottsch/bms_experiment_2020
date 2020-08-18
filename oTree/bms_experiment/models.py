@@ -55,9 +55,10 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     def creating_session(self):
         # randomize to treatments
-        transparency_conditions = itertools.cycle(['no', 'brief', 'detailed'])
+        # transparency_conditions = itertools.cycle(['no', 'brief', 'detailed'])
         for player in self.get_players():
-            player.trans_cond = next(transparency_conditions)
+            # player.participant.vars['tr'] = next(transparency_conditions)
+            player.participant.vars['tr'] = 'unassigned'
 
 
 class Group(BaseGroup):
@@ -69,7 +70,7 @@ def make_radio(label):
         choices=[
             [1, 'Totally Disagree'],
             [2, 'Disagree'],
-            [3, 'Undecided'],
+            [3, "Undecided/Not sure"],
             [4, 'Agree'],
             [5, 'Totally Agree'],
         ],
@@ -84,7 +85,9 @@ def make_open(label):
         widget=django.forms.Textarea(attrs={
             'rows': 5,
             'cols': 5,
-        })
+        }),
+        blank=True
+
     )
 
 
@@ -128,20 +131,4 @@ class Player(BasePlayer):
     warnings = make_open(Constants.labels['warnings'])
     infected = make_open(Constants.labels['infected'])
 
-    # # after
-    # # trust
-    # competence_post = make_field(Constants.labels['competence'])
-    # competence_neg_post = make_field(Constants.labels['competence_neg'])
-    # # benevolence
-    # benevolence_post = make_field(Constants.labels['benevolence'])
-    # benevolence_neg_post = make_field(Constants.labels['benevolence_neg'])
-    #
-    # # integrity
-    # no_central_entity_post = make_field(Constants.labels['no_central_entity'])
-    # no_central_entity_neg_post = make_field(Constants.labels['no_central_entity_neg'])
-    # anonymity_post = make_field(Constants.labels['anonymity'])
-    # anonymity_neg_post = make_field(Constants.labels['anonymity_neg'])
-    # no_tracking_post = make_field(Constants.labels['no_tracking'])
-    # no_tracking_neg_post = make_field(Constants.labels['no_tracking_neg'])
-    # unlinkabilty_post = make_field(Constants.labels['unlinkabilty'])
-    # unlinkabilty_neg_post = make_field(Constants.labels['unlinkabilty_neg'])
+    # finished = models.BooleanField()

@@ -13,7 +13,7 @@ SESSION_CONFIGS = [
     dict(
        name='bms_seminar_experiment',
        display_name="BMS Seminar Experiment",
-       num_demo_participants=3,
+       num_demo_participants=0,
        app_sequence=['bms_experiment']
     ),
 ]
@@ -29,7 +29,7 @@ USE_POINTS = True
 
 ROOMS = []
 
-ADMIN_USERNAME = 'admin'
+ADMIN_USERNAME = 'team_magma'
 # for security, best to set admin password in an environment variable
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 

@@ -13,7 +13,7 @@ Information
 <br>
 <h4> What the app does while being active </h4>
 <p>
-    {% if player.trans_cond == 'brief' %}
+    {% if tr == 'brief' %}
     The app will interchange pseudonymous data with nearby phones, which also have the app installed. This data cannot
     be used to expose the user’s identity.
     {% else %}
@@ -28,7 +28,7 @@ Information
 </p>
 <h4> What data is stored </h4>
 <p>
-    {% if player.trans_cond == 'brief' %}
+    {% if tr == 'brief' %}
     The only data that is stored on a central server is data, which contains pseudonymous information about someone, who
     got infected and voluntarily shared this information. This means no data, which can be traced back to the infected
     person, is stored. Later in the experiment you will be asked what the color is: the color is yellow.
@@ -44,7 +44,7 @@ Information
 </p>
 <h4> When warnings are given </h4>
 <p>
-    {% if player.trans_cond == 'brief' %}
+    {% if tr == 'brief' %}
     If the user has the pseudonymous data from someone, who got infected and shared this information, the app proceeds
     through a multitude of steps (i.e. weighing time of exposure and distance) to determine the infection risk and
     updates the user about their risk score. They will not have the possibility to find out who the infected person is.
@@ -59,7 +59,7 @@ Information
 </p>
 <h4> What happens when infected </h4>
 <p>
-    {% if player.trans_cond == 'brief' %}
+    {% if tr == 'brief' %}
     When a user gets infected with the coronavirus they will have the possibility to share this information to warn
     others. However, it is not possible to expose their identity, even if they decided to publicly share that they got
     infected.
