@@ -4,9 +4,9 @@
 {% block title %}
 
 {% if tr == 'no' %}
-Question Page 4/4
+Question Page 4/5
 {% else %}
-Question Page 6/6
+Question Page 6/7
 {% endif %}
 {% endblock %}
 
@@ -45,36 +45,7 @@ Question Page 6/6
     {{ form.benevolence_neg.label | safe}}
     {{ form.benevolence_neg }}
 </p>
-<hr/>
-<p>
-    {{ form.no_tracking.label | safe}}
-    {{ form.no_tracking }}
-</p>
-<hr/>
-<p>
-    {{ form.anonymity_neg.label | safe}}
-    {{ form.anonymity_neg }}
-</p>
-<hr/>
-<p>
-    {{ form.unlinkabilty.label | safe}}
-    {{ form.unlinkabilty }}
-</p>
-<hr/>
-<p>
-    {{ form.competence_neg.label | safe}}
-    {{ form.competence_neg }}
-</p>
-<hr/>
-<p>
-    {{ form.no_central_entity_neg.label | safe}}
-    {{ form.no_central_entity_neg }}
-</p>
-<hr/>
-<p>
-    {{ form.no_tracking_neg.label | safe}}
-    {{ form.no_tracking_neg }}
-</p>
+
 
 
 {% next_button %}

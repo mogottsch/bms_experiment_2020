@@ -28,7 +28,7 @@ class Constants(BaseConstants):
     labels = {
         'age': 'Age:',
         'gender': 'Gender:',
-        'installed': 'Have you installed the corona-warn-app?',
+        'installed': 'Have you installed the Corona-Warn-App?',
         'competence': 'The app will be able to keep your personal data secured.',
         'competence_neg': 'The app <strong>lacks</strong> the necessary competence to protect your data.',
         'benevolence': 'The app was made to collect your personal data.',
@@ -47,9 +47,9 @@ class Constants(BaseConstants):
         'activity': 'What does the app do while being active?',
         'data_stored': 'What data does the app store?',
         'warnings': 'When are warnings given?',
-        'infected': 'What happens when you had contact with an infected person.',
+        'infected': 'What happens when you had contact with an infected person?',
 
-        'understanding': 'Please rate your understanding of the corona-warn-app.'
+        'understanding': 'Please rate your understanding of the Corona-Warn-App.'
 
     }
 
@@ -70,11 +70,11 @@ class Group(BaseGroup):
 def make_radio(label):
     return models.IntegerField(
         choices=[
-            [1, 'Totally Disagree'],
-            [2, 'Disagree'],
-            [3, "Undecided/Not sure"],
-            [4, 'Agree'],
-            [5, 'Totally Agree'],
+            [1, mark_safe('<small>Totally Disagree</small>')],
+            [2, mark_safe('<small>Disagree</small>')],
+            [3, mark_safe('<small>Undecided/Not sure</small>')],
+            [4, mark_safe('<small>Agree</small>')],
+            [5, mark_safe('<small>Totally Agree</small>')],
         ],
         label=mark_safe(label),
         widget=widgets.RadioSelectHorizontal,

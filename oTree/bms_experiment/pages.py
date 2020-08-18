@@ -58,10 +58,6 @@ class ActualUnderstandingSurvey(Page):
             'tr': self.player.participant.vars['tr']
         }
 
-    def before_next_page(self):
-        if self.player.participant.vars['tr'] == 'no' or self.player.round_number == 2:
-            self.player.participant.vars['finished'] = True
-
 
 class PerceivedUnderstandingSurvey(Page):
     form_model = 'player'
@@ -73,31 +69,52 @@ class PerceivedUnderstandingSurvey(Page):
         }
 
 
-class TrustSurvey(Page):
+class TrustSurveyTemplate(Page):
     form_model = 'player'
 
-    form_fields = [
-        'competence',
-        'competence_neg',
-        'benevolence',
-        'benevolence_neg',
-        'no_central_entity',
-        'no_central_entity_neg',
-        'anonymity',
-        'anonymity_neg',
-        'no_tracking',
-        'no_tracking_neg',
-        'unlinkabilty',
-        'unlinkabilty_neg',
-    ]
-
     def is_displayed(self):
+        print('trust', self.player.participant.vars['tr'] == "no" or self.player.round_number == 2)
         return self.player.participant.vars['tr'] == "no" or self.player.round_number == 2
 
     def vars_for_template(self):
         return {
             'tr': self.player.participant.vars['tr']
         }
+
+
+class TrustSurvey(TrustSurveyTemplate):
+    form_model = 'player'
+    form_fields = [
+        'competence',
+        'benevolence',
+        'benevolence_neg',
+        'no_central_entity',
+        'anonymity',
+        'unlinkabilty_neg',
+    ]
+
+    def is_displayed(self):
+        print('trust1', self.player.participant.vars['tr'] == "no" or self.player.round_number == 2)
+        return self.player.participant.vars['tr'] == "no" or self.player.round_number == 2
+
+
+class TrustSurvey2(TrustSurveyTemplate):
+    form_fields = [
+        'no_tracking',
+        'anonymity_neg',
+        'unlinkabilty',
+        'competence_neg',
+        'no_central_entity_neg',
+        'no_tracking_neg',
+    ]
+
+    def is_displayed(self):
+        print('trust2', self.player.participant.vars['tr'] == "no" or self.player.round_number == 2)
+        return self.player.participant.vars['tr'] == "no" or self.player.round_number == 2
+
+    def before_next_page(self):
+        if self.player.participant.vars['tr'] == 'no' or self.player.round_number == 2:
+            self.player.participant.vars['finished'] = True
 
 
 class Information(Page):
@@ -116,4 +133,4 @@ class Ending(Page):
 
 
 page_sequence = [Introduction, GeneralInformationSurvey, PerceivedUnderstandingSurvey, ActualUnderstandingSurvey,
-                 Information, TrustSurvey, Ending]
+                 Information, TrustSurvey, TrustSurvey2, Ending]
