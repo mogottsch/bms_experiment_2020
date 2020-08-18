@@ -11,13 +11,13 @@ SESSION_CONFIG_DEFAULTS = dict(
 
 SESSION_CONFIGS = [
     dict(
-       name='bms_seminar_experiment',
-       display_name="BMS Seminar Experiment",
-       num_demo_participants=0,
-       app_sequence=['bms_experiment']
+        name='bms_seminar_experiment',
+        display_name="BMS Seminar Experiment",
+        num_demo_participants=50,
+        app_sequence=['bms_experiment'],
+        use_browser_bots=True
     ),
 ]
-
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans

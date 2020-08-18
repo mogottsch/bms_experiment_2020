@@ -1,0 +1,19 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+
+{% if tr == 'no' %}
+Question Page 2/4
+{% elif player.round_number == 1 %}
+Question Page 2/6
+{% else %}
+Question Page 4/6
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% formfields %}
+{% next_button %}
+
+{% endblock %}

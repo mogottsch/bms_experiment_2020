@@ -47,7 +47,9 @@ class Constants(BaseConstants):
         'activity': 'What does the app do while being active?',
         'data_stored': 'What data does the app store?',
         'warnings': 'When are warnings given?',
-        'infected': 'What happens when you had contact with an infected person.'
+        'infected': 'What happens when you had contact with an infected person.',
+
+        'understanding': 'Please rate your understanding of the corona-warn-app.'
 
     }
 
@@ -110,12 +112,12 @@ class Player(BasePlayer):
     installed = models.BooleanField(label=Constants.labels['installed'], widget=widgets.RadioSelectHorizontal)
 
     # trust
+    # competence
     competence = make_radio(Constants.labels['competence'])
     competence_neg = make_radio(Constants.labels['competence_neg'])
     # benevolence
     benevolence = make_radio(Constants.labels['benevolence'])
     benevolence_neg = make_radio(Constants.labels['benevolence_neg'])
-
     # integrity
     no_central_entity = make_radio(Constants.labels['no_central_entity'])
     no_central_entity_neg = make_radio(Constants.labels['no_central_entity_neg'])
@@ -126,6 +128,20 @@ class Player(BasePlayer):
     unlinkabilty = make_radio(Constants.labels['unlinkabilty'])
     unlinkabilty_neg = make_radio(Constants.labels['unlinkabilty_neg'])
 
+    # understanding
+    # perceived
+    understanding = models.IntegerField(
+        choices=[
+            [1, 'No understanding'],
+            [2, 'Limited understanding'],
+            [3, 'Moderate understanding'],
+            [4, 'Good understanding'],
+            [5, 'Complete understanding'],
+        ],
+        label=mark_safe(Constants.labels['understanding']),
+        widget=widgets.RadioSelect,
+    )
+    # actual
     activity = make_open(Constants.labels['activity'])
     data_stored = make_open(Constants.labels['data_stored'])
     warnings = make_open(Constants.labels['warnings'])

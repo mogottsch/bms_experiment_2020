@@ -26,7 +26,8 @@ class GeneralInformationSurvey(Page):
         trans_cond_brief_players = [player for player in finished_players_r1 if
                                     player.installed == installed and player.participant.vars.get('tr') == 'brief']
         trans_cond_detailed_players = [player for player in finished_players_r1 if
-                                       player.installed == installed and player.participant.vars.get('tr') == 'detailed']
+                                       player.installed == installed and player.participant.vars.get(
+                                           'tr') == 'detailed']
 
         len_no = len(trans_cond_no_players)
         len_brief = len(trans_cond_brief_players)
@@ -43,31 +44,7 @@ class GeneralInformationSurvey(Page):
             self.player.trans_cond = 'detailed'
 
 
-class RadioSurvey(Page):
-    form_model = 'player'
-
-    form_fields = [
-        'competence',
-        'competence_neg',
-        'benevolence',
-        'benevolence_neg',
-        'no_central_entity',
-        'no_central_entity_neg',
-        'anonymity',
-        'anonymity_neg',
-        'no_tracking',
-        'no_tracking_neg',
-        'unlinkabilty',
-        'unlinkabilty_neg',
-    ]
-
-    def vars_for_template(self):
-        return {
-            'tr': self.player.participant.vars['tr']
-        }
-
-
-class OpenSurvey(Page):
+class ActualUnderstandingSurvey(Page):
     form_model = 'player'
     form_fields = [
         'activity',
@@ -86,6 +63,43 @@ class OpenSurvey(Page):
             self.player.participant.vars['finished'] = True
 
 
+class PerceivedUnderstandingSurvey(Page):
+    form_model = 'player'
+    form_fields = ['understanding']
+
+    def vars_for_template(self):
+        return {
+            'tr': self.player.participant.vars['tr']
+        }
+
+
+class TrustSurvey(Page):
+    form_model = 'player'
+
+    form_fields = [
+        'competence',
+        'competence_neg',
+        'benevolence',
+        'benevolence_neg',
+        'no_central_entity',
+        'no_central_entity_neg',
+        'anonymity',
+        'anonymity_neg',
+        'no_tracking',
+        'no_tracking_neg',
+        'unlinkabilty',
+        'unlinkabilty_neg',
+    ]
+
+    def is_displayed(self):
+        return self.player.participant.vars['tr'] == "no" or self.player.round_number == 2
+
+    def vars_for_template(self):
+        return {
+            'tr': self.player.participant.vars['tr']
+        }
+
+
 class Information(Page):
     def is_displayed(self):
         return self.player.participant.vars['tr'] != 'no' and self.round_number == 1
@@ -101,4 +115,5 @@ class Ending(Page):
         return self.subsession.round_number == 2 or self.player.participant.vars['tr'] == 'no'
 
 
-page_sequence = [Introduction, GeneralInformationSurvey, RadioSurvey, OpenSurvey, Information, Ending]
+page_sequence = [Introduction, GeneralInformationSurvey, PerceivedUnderstandingSurvey, ActualUnderstandingSurvey,
+                 Information, TrustSurvey, Ending]
