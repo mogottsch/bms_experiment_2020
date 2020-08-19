@@ -80,9 +80,9 @@ class Constants(BaseConstants):
                         'positive within the following 14 days?',
             'answers': {
                 'a1': 'Sitting next to this person on the bus for 2 hours',
-                'a2': 'Walking by a pedestrian with less than 1.5 meter distance between you ',
+                'a2': 'Passing by this person with less than 1.5 meter distance between you ',
                 'a3': 'Sitting on opposite sides of the movie theater while watching a movie',
-                'a4': 'Meeting a friend for coffee in a cafe for 1 hour',
+                'a4': 'Meeting this person for coffee in a cafe for 1 hour',
                 'a5': 'I am not sure',
             }
         },
