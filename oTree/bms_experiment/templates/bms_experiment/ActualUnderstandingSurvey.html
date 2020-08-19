@@ -19,10 +19,54 @@ Question Page 5/7
     Please re-evaluate the following questions including the previous information text.
 </p>
 {% endif %}
-<p>
-    Try to answer the following questions in two to five sentences.
+<p class="lead">
+    It is possible to select multiple answers.
 </p>
-{% formfields %}
+
+<p>
+    {{ q1_text }}
+</p>
+<div class="ml-5 mb-3">
+    {% formfield player.q1_a1 %}
+    {% formfield player.q1_a2 %}
+    {% formfield player.q1_a3 %}
+    {% formfield player.q1_a4 %}
+    {% formfield player.q1_a5 %}
+</div>
+<hr/>
+<p>
+    {{ q2_text }}
+</p>
+<div class="ml-5 mb-3">
+    {% formfield player.q2_a1 %}
+    {% formfield player.q2_a2 %}
+    {% formfield player.q2_a3 %}
+    {% formfield player.q2_a4 %}
+    {% formfield player.q2_a5 %}
+</div>
+<hr/>
+<p>
+    {{ q3_text }}
+</p>
+<div class="ml-5 mb-3">
+    {% formfield player.q3_a1 %}
+    {% formfield player.q3_a2 %}
+    {% formfield player.q3_a3 %}
+    {% formfield player.q3_a4 %}
+    {% formfield player.q3_a5 %}
+</div>
+<hr/>
+<p>
+    {{ q4_text }}
+</p>
+<div class="ml-5 mb-3">
+    {% formfield player.q4_a1 %}
+    {% formfield player.q4_a2 %}
+    {% formfield player.q4_a3 %}
+    {% formfield player.q4_a4 %}
+    {% formfield player.q4_a5 %}
+</div>
+<hr/>
 
 
 {% next_button %}
@@ -31,16 +75,5 @@ Question Page 5/7
 
 
 {% block app_scripts %}
-<script>
-    const tx = document.getElementsByTagName('textarea');
-    for (let i = 0; i < tx.length; i++) {
-        tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');
-        tx[i].addEventListener("input", OnInput, false);
-    }
 
-    function OnInput() {
-        this.style.height = 'auto';
-        this.style.height = (this.scrollHeight) + 'px';
-    }
-</script>
 {% endblock %}

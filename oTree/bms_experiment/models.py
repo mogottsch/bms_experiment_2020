@@ -11,9 +11,8 @@ from otree.api import (
 import itertools
 import random
 from django.utils.safestring import mark_safe
-import django.forms
 
-author = 'Moritz Gottschling, Anne Mensing, Julia Lauten, Kateryna Kuian'
+author = 'Anne Mensing, Julia Lauten, Kateryna Kuian, Moritz Gottschling'
 
 doc = """
 This is the source code for the experiment for our bms seminar paper 2020.
@@ -54,6 +53,52 @@ class Constants(BaseConstants):
         'understanding': 'Please rate your technical understanding of the Corona-Warn-App.',
     }
 
+    m_choice_questions = {
+        'q1': {
+            'text': 'What do two phones that have the app installed exchange?',
+            'answers': {
+                'a1': 'They exchange GPS coordinates',
+                'a2': 'They exchange data about your person ',
+                'a3': 'They exchange randomly generated keys',
+                'a4': 'They exchange a key that is assigned to you after installation of the app  ',
+                'a5': 'I am not sure',
+            }
+        },
+        'q2': {
+            'text': 'What data is stored centrally?',
+            'answers': {
+
+                'a1': 'Location data',
+                'a2': 'List of names of people infected',
+                'a3': 'Randomly generated keys of all users',
+                'a4': 'None of the above',
+                'a5': 'I am not sure',
+            }
+        },
+        'q3': {
+            'text': 'Which encounter would lead to a high risk assessment for the other person in case you test '
+                        'positive within the following 14 days?',
+            'answers': {
+                'a1': 'Sitting next to this person on the bus for 2 hours',
+                'a2': 'Walking by a pedestrian with less than 1.5 meter distance between you ',
+                'a3': 'Sitting on opposite sides of the movie theater while watching a movie',
+                'a4': 'Meeting a friend for coffee in a cafe for 1 hour',
+                'a5': 'I am not sure',
+            }
+        },
+        'q4': {
+            'text': 'What happens if you are classified as “high risk” in the Corona-Warn-App?',
+            'answers': {
+                'a1': 'The health department will contact you to ask about your symptoms and assess whether a '
+                      'COVID-19 test is necessary',
+                'a2': 'Your key will be automatically uploaded to the server',
+                'a3': 'You will be quarantined for 14 days',
+                'a4': 'It will be upon you to take action',
+                'a5': 'I am not sure',
+            }
+        },
+    }
+
 
 class Subsession(BaseSubsession):
     def creating_session(self):
@@ -82,13 +127,10 @@ def make_radio(label):
     )
 
 
-def make_open(label):
-    return models.StringField(
-        label=mark_safe(label),
-        widget=django.forms.Textarea(attrs={
-            'rows': 5,
-            'cols': 5,
-        }),
+def make_answer(label):
+    return models.BooleanField(
+        label=label,
+        widget=widgets.CheckboxInput,
         blank=True
     )
 
@@ -103,7 +145,6 @@ def make_attentive():
 class Player(BasePlayer):
     # automatically selected
     trans_cond = models.StringField();
-
     # general information
     age = models.IntegerField(label=Constants.labels['age'])
     gender = models.IntegerField(
@@ -117,7 +158,6 @@ class Player(BasePlayer):
         widget=widgets.RadioSelectHorizontal
     )
     installed = models.BooleanField(label=Constants.labels['installed'], widget=widgets.RadioSelectHorizontal)
-
     # trust
     # competence
     competence = make_radio(Constants.labels['competence'])
@@ -134,7 +174,6 @@ class Player(BasePlayer):
     no_tracking_neg = make_radio(Constants.labels['no_tracking_neg'])
     unlinkabilty = make_radio(Constants.labels['unlinkabilty'])
     unlinkabilty_neg = make_radio(Constants.labels['unlinkabilty_neg'])
-
     # understanding
     # perceived
     understanding = models.IntegerField(
@@ -148,13 +187,34 @@ class Player(BasePlayer):
         label=mark_safe(Constants.labels['understanding']),
         widget=widgets.RadioSelect,
     )
-    # actual
-    activity = make_open(Constants.labels['activity'])
-    data_stored = make_open(Constants.labels['data_stored'])
-    warnings = make_open(Constants.labels['warnings'])
-    infected = make_open(Constants.labels['infected'])
 
+    # actual
+    q1_a1 = make_answer(Constants.m_choice_questions['q1']['answers']['a1'])
+    q1_a2 = make_answer(Constants.m_choice_questions['q1']['answers']['a2'])
+    q1_a3 = make_answer(Constants.m_choice_questions['q1']['answers']['a3'])
+    q1_a4 = make_answer(Constants.m_choice_questions['q1']['answers']['a4'])
+    q1_a5 = make_answer(Constants.m_choice_questions['q1']['answers']['a5'])
+
+    q2_a1 = make_answer(Constants.m_choice_questions['q2']['answers']['a1'])
+    q2_a2 = make_answer(Constants.m_choice_questions['q2']['answers']['a2'])
+    q2_a3 = make_answer(Constants.m_choice_questions['q2']['answers']['a3'])
+    q2_a4 = make_answer(Constants.m_choice_questions['q2']['answers']['a4'])
+    q2_a5 = make_answer(Constants.m_choice_questions['q2']['answers']['a5'])
+
+    q3_a1 = make_answer(Constants.m_choice_questions['q3']['answers']['a1'])
+    q3_a2 = make_answer(Constants.m_choice_questions['q3']['answers']['a2'])
+    q3_a3 = make_answer(Constants.m_choice_questions['q3']['answers']['a3'])
+    q3_a4 = make_answer(Constants.m_choice_questions['q3']['answers']['a4'])
+    q3_a5 = make_answer(Constants.m_choice_questions['q3']['answers']['a5'])
+
+    q4_a1 = make_answer(Constants.m_choice_questions['q4']['answers']['a1'])
+    q4_a2 = make_answer(Constants.m_choice_questions['q4']['answers']['a2'])
+    q4_a3 = make_answer(Constants.m_choice_questions['q4']['answers']['a3'])
+    q4_a4 = make_answer(Constants.m_choice_questions['q4']['answers']['a4'])
+    q4_a5 = make_answer(Constants.m_choice_questions['q4']['answers']['a5'])
+
+    # attentive
     attentive_1 = make_attentive()
     attentive_2 = make_attentive()
-
+    # finished
     finished = models.BooleanField()
