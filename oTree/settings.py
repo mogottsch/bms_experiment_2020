@@ -13,7 +13,7 @@ SESSION_CONFIGS = [
     dict(
         name='bms_seminar_experiment',
         display_name="BMS Seminar Experiment",
-        num_demo_participants=0,
+        num_demo_participants=10,
         app_sequence=['bms_experiment'],
     ),
 ]

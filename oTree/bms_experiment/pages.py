@@ -47,10 +47,7 @@ class GeneralInformationSurvey(Page):
 class ActualUnderstandingSurvey(Page):
     form_model = 'player'
     form_fields = [
-        'activity',
-        'data_stored',
-        'warnings',
-        'infected',
+        'exchange',
     ]
 
     def vars_for_template(self):

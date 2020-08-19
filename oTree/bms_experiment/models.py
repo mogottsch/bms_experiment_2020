@@ -11,9 +11,8 @@ from otree.api import (
 import itertools
 import random
 from django.utils.safestring import mark_safe
-import django.forms
 
-author = 'Moritz Gottschling, Anne Mensing, Julia Lauten, Kateryna Kuian'
+author = 'Anne Mensing, Julia Lauten, Kateryna Kuian, Moritz Gottschling'
 
 doc = """
 This is the source code for the experiment for our bms seminar paper 2020.
@@ -54,6 +53,17 @@ class Constants(BaseConstants):
         'understanding': 'Please rate your technical understanding of the Corona-Warn-App.',
     }
 
+    m_choice_questions = {
+        'exchange': ('What do two phones that have the app installed exchange?',
+                     [
+                         [0, 'I am not sure'],
+                         [1, 'They exchange GPS coordinates'],
+                         [2, 'They exchange data about your person'],
+                         [3, 'They exchange randomly generated keys'],
+                         [4, 'They exchange a key that is assigned to you after installation of the app']
+                     ])
+    }
+
 
 class Subsession(BaseSubsession):
     def creating_session(self):
@@ -82,14 +92,11 @@ def make_radio(label):
     )
 
 
-def make_open(label):
-    return models.StringField(
-        label=mark_safe(label),
-        widget=django.forms.Textarea(attrs={
-            'rows': 5,
-            'cols': 5,
-        }),
-        blank=True
+def make_multiple(label, choices):
+    return models.IntegerField(
+        choices=choices,
+        label=label,
+        widget=widgets.RadioSelectHorizontal
     )
 
 
@@ -149,12 +156,10 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect,
     )
     # actual
-    activity = make_open(Constants.labels['activity'])
-    data_stored = make_open(Constants.labels['data_stored'])
-    warnings = make_open(Constants.labels['warnings'])
-    infected = make_open(Constants.labels['infected'])
+    exchange = make_multiple(*(Constants.m_choice_questions['exchange']))
 
+    # attentive
     attentive_1 = make_attentive()
     attentive_2 = make_attentive()
-
+    # finished
     finished = models.BooleanField()

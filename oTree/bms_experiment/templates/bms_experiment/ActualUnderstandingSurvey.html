@@ -20,7 +20,7 @@ Question Page 5/7
 </p>
 {% endif %}
 <p>
-    Try to answer the following questions in two to five sentences.
+    It is possible to select multiple answers.
 </p>
 {% formfields %}
 
@@ -31,16 +31,5 @@ Question Page 5/7
 
 
 {% block app_scripts %}
-<script>
-    const tx = document.getElementsByTagName('textarea');
-    for (let i = 0; i < tx.length; i++) {
-        tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');
-        tx[i].addEventListener("input", OnInput, false);
-    }
 
-    function OnInput() {
-        this.style.height = 'auto';
-        this.style.height = (this.scrollHeight) + 'px';
-    }
-</script>
 {% endblock %}
