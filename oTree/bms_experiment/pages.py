@@ -115,16 +115,43 @@ class TrustSurvey2(TrustSurveyTemplate):
     def before_next_page(self):
         if self.player.participant.vars['tr'] == 'no' or self.player.round_number == 2:
             self.player.participant.vars['finished'] = True
+            self.player.finished = True
 
 
 class Information(Page):
     def is_displayed(self):
-        return self.player.participant.vars['tr'] != 'no' and self.round_number == 1
+        return self.player.participant.vars['tr'] != 'no' and self.round_number == 1 and (
+                self.player.attentive_1 != 'yellow')
+
+    def vars_for_template(self):
+        prev_wrong = True if self.player.attentive_1 and self.player.attentive_1 != 'yellow' else False
+        return {
+            'tr': self.player.participant.vars['tr'],
+            'prev_wrong': prev_wrong
+        }
+
+
+class AttentiveSurveyTemplate(Page):
+    form_model = 'player'
 
     def vars_for_template(self):
         return {
             'tr': self.player.participant.vars['tr']
         }
+
+    def is_displayed(self):
+        return self.player.participant.vars['tr'] != 'no' and self.player.round_number == 1
+
+
+class AttentiveSurvey1(AttentiveSurveyTemplate):
+    form_fields = ['attentive_1']
+
+
+class AttentiveSurvey2(AttentiveSurveyTemplate):
+    form_fields = ['attentive_2']
+
+    def is_displayed(self):
+        return super().is_displayed() and self.player.attentive_1 != 'yellow'
 
 
 class Ending(Page):
@@ -133,4 +160,4 @@ class Ending(Page):
 
 
 page_sequence = [Introduction, GeneralInformationSurvey, PerceivedUnderstandingSurvey, ActualUnderstandingSurvey,
-                 Information, TrustSurvey, TrustSurvey2, Ending]
+                 Information, AttentiveSurvey1, Information, AttentiveSurvey2, TrustSurvey, TrustSurvey2, Ending]

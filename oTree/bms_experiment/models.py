@@ -90,7 +90,13 @@ def make_open(label):
             'cols': 5,
         }),
         blank=True
+    )
 
+
+def make_attentive():
+    return models.StringField(
+        choices=['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'pink', 'white', 'gray', 'brown', 'black'],
+        label='What was the color?'
     )
 
 
@@ -148,4 +154,7 @@ class Player(BasePlayer):
     warnings = make_open(Constants.labels['warnings'])
     infected = make_open(Constants.labels['infected'])
 
-    # finished = models.BooleanField()
+    attentive_1 = make_attentive()
+    attentive_2 = make_attentive()
+
+    finished = models.BooleanField()
