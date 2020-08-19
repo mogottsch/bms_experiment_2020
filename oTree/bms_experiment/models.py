@@ -29,10 +29,12 @@ class Constants(BaseConstants):
         'age': 'Age:',
         'gender': 'Gender:',
         'installed': 'Have you installed the Corona-Warn-App?',
-        'competence': 'The app will be able to keep your personal data secured.',
-        'competence_neg': 'The app <strong>lacks</strong> the necessary competence to protect your data.',
-        'benevolence': 'The app was made to collect your personal data.',
-        'benevolence_neg': 'The app acts in your interest.',
+
+        'competence': 'The app will be able to keep my personal data secured.',
+        'competence_neg': 'The app <strong>lacks</strong> the necessary competence to protect my data.',
+
+        'benevolence': 'The app was made to collect my personal data.',
+        'benevolence_neg': 'The app acts in my interest.',
 
         'no_central_entity': 'The app does <strong>not</strong> store my personal data on a central server.',
         'no_central_entity_neg': 'The personal data of mine is stored by the app on a central server.',
@@ -49,8 +51,7 @@ class Constants(BaseConstants):
         'warnings': 'When are warnings given?',
         'infected': 'What happens when you had contact with an infected person?',
 
-        'understanding': 'Please rate your understanding of the Corona-Warn-App.'
-
+        'understanding': 'Please rate your technical understanding of the Corona-Warn-App.',
     }
 
 
