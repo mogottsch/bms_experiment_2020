@@ -14,6 +14,11 @@ Question Page 5/7
 {% endblock %}
 
 {% block content %}
+{% if tr != 'no' and player.round_number == 2 %}
+<p class="lead">
+    Please re-evaluate the following questions including the previous information text.
+</p>
+{% endif %}
 <p>
     Try to answer the following questions in two to five sentences.
 </p>
