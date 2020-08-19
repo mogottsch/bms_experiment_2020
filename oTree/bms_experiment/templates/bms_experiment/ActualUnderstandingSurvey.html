@@ -19,10 +19,54 @@ Question Page 5/7
     Please re-evaluate the following questions including the previous information text.
 </p>
 {% endif %}
-<p>
+<p class="lead">
     It is possible to select multiple answers.
 </p>
-{% formfields %}
+
+<p>
+    {{ q1_text }}
+</p>
+<div class="ml-5 mb-3">
+    {% formfield player.q1_a1 %}
+    {% formfield player.q1_a2 %}
+    {% formfield player.q1_a3 %}
+    {% formfield player.q1_a4 %}
+    {% formfield player.q1_a5 %}
+</div>
+<hr/>
+<p>
+    {{ q2_text }}
+</p>
+<div class="ml-5 mb-3">
+    {% formfield player.q2_a1 %}
+    {% formfield player.q2_a2 %}
+    {% formfield player.q2_a3 %}
+    {% formfield player.q2_a4 %}
+    {% formfield player.q2_a5 %}
+</div>
+<hr/>
+<p>
+    {{ q3_text }}
+</p>
+<div class="ml-5 mb-3">
+    {% formfield player.q3_a1 %}
+    {% formfield player.q3_a2 %}
+    {% formfield player.q3_a3 %}
+    {% formfield player.q3_a4 %}
+    {% formfield player.q3_a5 %}
+</div>
+<hr/>
+<p>
+    {{ q4_text }}
+</p>
+<div class="ml-5 mb-3">
+    {% formfield player.q4_a1 %}
+    {% formfield player.q4_a2 %}
+    {% formfield player.q4_a3 %}
+    {% formfield player.q4_a4 %}
+    {% formfield player.q4_a5 %}
+</div>
+<hr/>
 
 
 {% next_button %}

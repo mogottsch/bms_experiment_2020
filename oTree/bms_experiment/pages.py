@@ -46,13 +46,16 @@ class GeneralInformationSurvey(Page):
 
 class ActualUnderstandingSurvey(Page):
     form_model = 'player'
-    form_fields = [
-        'exchange',
-    ]
+    form_fields = ['q1_a1', 'q1_a2', 'q1_a3', 'q1_a4', 'q1_a5', 'q2_a1', 'q2_a2', 'q2_a3', 'q2_a4', 'q2_a5', 'q3_a1',
+                   'q3_a2', 'q3_a3', 'q3_a4', 'q3_a5', 'q4_a1', 'q4_a2', 'q4_a3', 'q4_a4', 'q4_a5']
 
     def vars_for_template(self):
         return {
-            'tr': self.player.participant.vars['tr']
+            'tr': self.player.participant.vars['tr'],
+            'q1_text': Constants.m_choice_questions['q1']['text'],
+            'q2_text': Constants.m_choice_questions['q2']['text'],
+            'q3_text': Constants.m_choice_questions['q3']['text'],
+            'q4_text': Constants.m_choice_questions['q4']['text'],
         }
 
 
@@ -70,7 +73,6 @@ class TrustSurveyTemplate(Page):
     form_model = 'player'
 
     def is_displayed(self):
-        print('trust', self.player.participant.vars['tr'] == "no" or self.player.round_number == 2)
         return self.player.participant.vars['tr'] == "no" or self.player.round_number == 2
 
     def vars_for_template(self):
@@ -91,7 +93,6 @@ class TrustSurvey(TrustSurveyTemplate):
     ]
 
     def is_displayed(self):
-        print('trust1', self.player.participant.vars['tr'] == "no" or self.player.round_number == 2)
         return self.player.participant.vars['tr'] == "no" or self.player.round_number == 2
 
 
@@ -106,7 +107,6 @@ class TrustSurvey2(TrustSurveyTemplate):
     ]
 
     def is_displayed(self):
-        print('trust2', self.player.participant.vars['tr'] == "no" or self.player.round_number == 2)
         return self.player.participant.vars['tr'] == "no" or self.player.round_number == 2
 
     def before_next_page(self):
